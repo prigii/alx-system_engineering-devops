@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Check if an argument is passed
 if [ $# -eq 0 ]; then
     echo "Usage: $0 {IP_ADDRESS}"
