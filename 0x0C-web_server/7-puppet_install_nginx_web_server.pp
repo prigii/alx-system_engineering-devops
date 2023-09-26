@@ -1,6 +1,24 @@
-# automate the task of creating a custom HTTP header response, but with Puppet.
+# Setup New Ubuntu server with nginx
 
-exec { 'http config':
-  provider => shell,
-  command  => 'sudo apt-get update -y && sudo apt-get install -y nginx && echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html && sudo sed -i "19i rewrite ^/redirect_me https://youtube.com/ permanent;" /etc/nginx/sites-enabled/default && echo "Ceci n\'est pas une page" | sudo tee /usr/share/nginx/html/page_error_404.html && sudo sed -i "37i error_page 404 /page_error_404.html;\nlocation = /page_error_404.html {\nroot /usr/share/nginx/html; \ninternal;\n}" /etc/nginx/sites-enabled/default && sudo service nginx restart',
+exec { 'update system':
+        command => '/usr/bin/apt-get update',
+}
+
+package { 'nginx':
+	ensure => 'installed',
+	require => Exec['update system']
+}
+
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
+}
+
+exec {'redirect_me':
+	command => 'sed -i "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+	provider => 'shell'
+}
+
+service {'nginx':
+	ensure => running,
+	require => Package['nginx']
 }
