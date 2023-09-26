@@ -1,7 +1,7 @@
 # puppet script that sets up ssh config file to allow connectivity without password
 # Changes SSH config file
-exec { 'echo':
-  path    => 'usr/bin:/bin',
-  command => 'echo "    IdentityFile ~/.ssh/holberton\n    PasswordAuthentication no" >> /etc/ssh/ssh_config',
-  returns => [0,1],
+exec { '/etc/ssh/ssh_config':
+  path    => '/bin',
+  command => 'echo "    IdentityFile ~/.ssh/school    PasswordAuthentication no" >> /etc/ssh/ssh_config',
+  provider => 'shell',
 }
