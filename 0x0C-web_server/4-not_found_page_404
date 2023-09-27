@@ -27,8 +27,8 @@ new_config=\
         }
 }
 "
-echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
-sudo sed -i '25i\	error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+echo "$new_config" > /etc/nginx/sites-available/default
 
 if [ "$(pgrep nginx)" -le 0 ];
 then
