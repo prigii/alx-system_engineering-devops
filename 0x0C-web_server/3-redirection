@@ -1,31 +1,9 @@
 #!/usr/bin/env bash
-# Configures Nginx to redirect /redirect_me to another page with 301 Moved Permanently
+#Configure a new Nginx server so that /redirect_me is redirecting to another page
 
-# Update the Nginx configuration file
-sudo bash -c "cat > /etc/nginx/sites-available/redirection" << EOL
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location /redirect_me {
-        return "301 Moved Permanently";
-    }
-}
-EOL
-
-# Enable the new configuration and remove the default one
-sudo ln -sf /etc/nginx/sites-available/redirection /etc/nginx/sites-enabled/
-sudo rm -f /etc/nginx/sites-enabled/default
-
-# Restart Nginx without using systemctl
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World" | sudo tee /var/www/html/index
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
 sudo service nginx restart
-
