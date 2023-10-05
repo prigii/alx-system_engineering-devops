@@ -49,8 +49,8 @@ backend servers
     balance roundrobin
     option forwardfor
     http-response set-header X-Served-By %[req.hdr(host)]
-    server web-01 3.85.148.155 check
-    server web-02 100.25.22.138 check
+    server 274050-web-01 3.85.148.155 check
+    server 274050-web-02 100.25.22.138 check
 EOL"
 
 # Restart HAProxy to apply the changes
