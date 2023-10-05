@@ -1,0 +1,8 @@
+frontend www
+    bind *:443 ssl crt /etc/ssl/certs/mysite.pem
+    default_backend web_servers
+
+backend web_servers
+    balance roundrobin
+    server web1 <web-01 IP>:80 check
+    server web2 <web-02 IP>:80 check
