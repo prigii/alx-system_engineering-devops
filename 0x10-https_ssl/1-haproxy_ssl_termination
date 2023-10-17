@@ -39,7 +39,7 @@ defaults
 
 frontend http-in
     bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/live/www.aiglow.tech/fullchain.pem key /etc/letsencrypt/live/www.aiglow.tech/privkey.pem
+    bind *:443 ssl crt /etc/haproxy/certs/www.peterrex.tech.pem
     mode http
     http-request redirect scheme https if !{ ssl_fc }
     default_backend servers
@@ -49,8 +49,8 @@ backend servers
     balance roundrobin
     option forwardfor
     http-response set-header X-Served-By %[req.hdr(host)]
-    server 274050-web-01 3.85.148.155 check
-    server 274050-web-02 100.25.22.138 check
+    server 274050-web-01 3.85.148.155:80// check
+    server 274050-web-02 100.25.22.138:80 check
 EOL"
 
 # Restart HAProxy to apply the changes
