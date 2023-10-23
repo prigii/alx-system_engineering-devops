@@ -1,6 +1,0 @@
-# config file for ssh client ensuring no connectivity by use of a password
-Host *
-	Hostname 3.86.13.230
-	User ubuntu
-	PasswordAunthentication no
-	IdentityFile ~/.ssh/school

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-# This script is for a while loop displaying "Best School" 10 times
-x=1
-name="Best School"
-while [ $x -le 10 ]
-do 
-echo "$name"
-x=$(( x + 1 ))
-done
