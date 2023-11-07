@@ -1,4 +1,4 @@
-#!/bin/usr/python3
+#!/usr/bin/python3
 """ Imports number of subs from a reddit page """
 import requests
 
