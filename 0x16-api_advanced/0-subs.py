@@ -2,6 +2,7 @@
 """ Imports number of subs from a reddit page """
 import requests
 
+
 def number_of_subscribers(subreddit):
     # Define the Reddit API URL for the given subreddit
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
