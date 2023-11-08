@@ -5,7 +5,9 @@ the titles of all hot articles for a given subreddit """
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=None, after=None):
+    if hot_list is None:
+        hot_list = []
     # Base case: if hot_list has 10 or more items, return it
     if len(hot_list) >= 10:
         return hot_list[:10]
